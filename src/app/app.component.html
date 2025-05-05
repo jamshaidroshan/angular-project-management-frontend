@@ -1,0 +1,78 @@
+<mat-toolbar color="primary" class="topbar mat-elevation-z4">
+  <!-- only show menu button on handset -->
+  <button
+    mat-icon-button
+    *ngIf="isHandset$ | async"
+    (click)="drawer.toggle()"
+    aria-label="Toggle menu"
+  >
+    <mat-icon class="white_color">menu</mat-icon>
+  </button>
+
+  <span class="app-title">Project Management</span>
+  <span class="example-spacer"></span>
+
+  <button mat-icon-button aria-label="Notifications">
+    <mat-icon class="white_color">notifications</mat-icon>
+  </button>
+  <button mat-icon-button aria-label="Person">
+    <mat-icon class="white_color">person</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)"
+    class="sidenav mat-elevation-z4"
+  >
+    <mat-tree
+      #tree
+      [dataSource]="dataSource"
+      [childrenAccessor]="childrenAccessor"
+      class="custom-tree"
+    >
+      <!-- app.component.html -->
+      <mat-tree-node
+        *matTreeNodeDef="let node; when: hasChild"
+        matTreeNodePadding
+        matTreeNodeToggle
+      >
+        <button mat-icon-button matTreeNodeToggle>
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{ tree.isExpanded(node) ? "expand_more" : "chevron_right" }}
+          </mat-icon>
+        </button>
+
+        <!-- use [routerLink] + routerLinkActive -->
+        <a
+          class="tree-node-text"
+          [routerLink]="node.route"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          {{ node.name }}
+        </a>
+      </mat-tree-node>
+
+      <!-- and for leaf nodes, similarly: -->
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+        <button mat-icon-button disabled></button>
+        <a
+          class="tree-node-text"
+          [routerLink]="node.route"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          {{ node.name }}
+        </a>
+      </mat-tree-node>
+    </mat-tree>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="main-content">
+    <!-- your routed views go here -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

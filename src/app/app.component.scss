@@ -1,0 +1,92 @@
+/* full-height container */
+.sidenav-container {
+  height: 100vh;
+}
+
+/* toolbar */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: linear-gradient(45deg, #003f5c, #2f4b7c);
+  color: #fff;
+
+  .app-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+
+  button.mat-icon-button {
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+/* sidenav */
+.sidenav {
+  width: 260px;
+  box-shadow: 1px 10px 10px gray;
+  border-radius: 0;
+
+  .sidenav-header {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  .custom-tree {
+    padding: 0 8px;
+
+    .mat-tree-node {
+      border-radius: 4px;
+      margin: 2px 0;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+
+      .tree-node-text {
+        font-size: 0.95rem;
+      }
+    }
+  }
+}
+
+/* main content */
+.main-content {
+  padding: 16px;
+  background-color: #fafafa;
+}
+
+/* app.component.scss */
+.tree-node-text {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}
+
+/* this class is toggled by routerLinkActive */
+.active-link {
+  background-color: rgba(0, 95, 200, 0.1);
+  font-weight: 600;
+  color: #003f5c;
+}
+
+/* responsive tweaks */
+@media (max-width: 599px) {
+  .sidenav {
+    width: 200px;
+  }
+}
